@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" width="100%" height="100%">
+  <defs>
+    <!-- Background office/salon lounge lighting -->
+    <radialGradient id="bgManLight" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#242b35"/>
+      <stop offset="50%" stop-color="#141a22"/>
+      <stop offset="100%" stop-color="#080c10"/>
+    </radialGradient>
+    <radialGradient id="manSpot" cx="50%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="#e5b869" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="manSkin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c98a65"/>
+      <stop offset="50%" stop-color="#ad704c"/>
+      <stop offset="100%" stop-color="#8c5332"/>
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4a5a48"/>
+      <stop offset="50%" stop-color="#344233"/>
+      <stop offset="100%" stop-color="#222b21"/>
+    </linearGradient>
+    <linearGradient id="laptopSilver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f4f8"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="goldGlint2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe8a3"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a6a1b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="700" fill="url(#bgManLight)"/>
+  <circle cx="250" cy="220" r="250" fill="url(#manSpot)"/>
+
+  <!-- Subtle modern lounge background -->
+  <g opacity="0.2" stroke="#d4af37" stroke-width="1.2" fill="none">
+    <line x1="80" y1="200" x2="80" y2="600"/>
+    <line x1="420" y1="200" x2="420" y2="600"/>
+    <rect x="360" y="240" width="80" height="120" rx="8"/>
+    <circle cx="100" cy="240" r="24"/>
+  </g>
+
+  <!-- Man Body (Sitting, leaning slightly forward, gesturing) -->
+  <g id="man">
+    <!-- White T-Shirt base -->
+    <path d="M190,320 Q250,350 310,320 L320,480 L180,480 Z" fill="#e2e8f0"/>
+
+    <!-- Stylish Olive Casual Jacket -->
+    <!-- Left side of jacket -->
+    <path d="M110,360 C120,280 180,260 210,270 L210,480 L120,530 C100,470 95,410 110,360 Z" fill="url(#jacket)"/>
+    <!-- Right side of jacket -->
+    <path d="M390,360 C380,280 320,260 290,270 L290,480 L380,530 C400,470 405,410 390,360 Z" fill="url(#jacket)"/>
+
+    <!-- Arms -->
+    <!-- Left Arm holding side of laptop -->
+    <path d="M120,380 C110,440 140,510 200,530 C210,520 220,510 200,490 C160,470 140,430 145,390 Z" fill="url(#manSkin)"/>
+    <!-- Right Arm gesturing / talking with expression -->
+    <path d="M380,380 C395,430 380,490 320,490 C310,480 315,465 335,460 C365,450 370,410 360,390 Z" fill="url(#manSkin)"/>
+    <!-- Right Hand open gesture -->
+    <ellipse cx="310" cy="480" rx="16" ry="12" fill="url(#manSkin)" transform="rotate(-15 310 480)"/>
+
+    <!-- Modern Slim Laptop on lap/hands -->
+    <!-- Screen Open Angle -->
+    <polygon points="170,460 280,430 285,530 175,560" fill="url(#laptopSilver)"/>
+    <polygon points="175,466 275,438 280,524 180,552" fill="#0f172a"/>
+    <!-- Apple / Brand glowing logo outline on back of laptop -->
+    <circle cx="228" cy="495" r="7" fill="#ffffff" opacity="0.85"/>
+
+    <!-- Keyboard base plate -->
+    <polygon points="175,560 285,530 330,570 210,600" fill="url(#laptopSilver)"/>
+    <!-- Hand on keyboard -->
+    <ellipse cx="205" cy="545" rx="18" ry="10" fill="url(#manSkin)"/>
+
+    <!-- Neck -->
+    <path d="M225,230 L225,290 C225,305 275,305 275,290 L275,230 Z" fill="url(#manSkin)"/>
+
+    <!-- Head & Expressive Friendly Face -->
+    <ellipse cx="250" cy="180" rx="60" ry="74" fill="url(#manSkin)"/>
+
+    <!-- Hair (Stylish, salt & pepper / grey streaks on sides) -->
+    <!-- Main dark hair volume -->
+    <path d="M190,175 C185,110 220,85 255,85 C295,85 315,110 310,175 C295,145 285,120 250,120 C215,120 205,145 190,175 Z" fill="#231f20"/>
+    <!-- Silver-grey textured highlights in hair -->
+    <path d="M195,160 Q215,130 250,130 Q285,130 305,160" stroke="#cbd5e1" stroke-width="2.5" fill="none" opacity="0.6"/>
+    <path d="M210,145 Q240,115 275,125" stroke="#cbd5e1" stroke-width="2" fill="none" opacity="0.5"/>
+
+    <!-- Neatly Groomed Salt-and-Pepper Beard -->
+    <path d="M195,190 C190,265 220,285 250,285 C280,285 310,265 305,190 C290,215 280,230 250,230 C220,230 210,215 195,190 Z" fill="#2b2627"/>
+    <!-- Beard silver flecks & texture -->
+    <path d="M205,210 C215,260 235,275 250,275 C265,275 285,260 295,210" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.65"/>
+    <path d="M220,235 C230,265 240,270 250,270 C260,270 270,265 280,235" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+    <!-- Mustache -->
+    <path d="M225,215 Q250,210 275,215 Q250,230 225,215 Z" fill="#352e2f"/>
+
+    <!-- Warm Broad Smile with Teeth -->
+    <path d="M228,218 Q250,238 272,218 Q250,244 228,218 Z" fill="#ffffff"/>
+    <path d="M226,217 Q250,236 274,217" stroke="#5a311b" stroke-width="2" fill="none"/>
+
+    <!-- Eyes (Warm Crinkles / Genuine Laugh Lines) -->
+    <path d="M216,168 Q228,160 240,168" stroke="#1f140e" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M260,168 Q272,160 284,168" stroke="#1f140e" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Laugh lines / Crow's feet -->
+    <path d="M208,166 L214,168 M208,172 L215,170" stroke="#783c1d" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M292,166 L286,168 M292,172 L285,170" stroke="#783c1d" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Eyebrows with natural arch -->
+    <path d="M212,154 Q228,145 242,156" stroke="#1c120a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <path d="M258,156 Q272,145 288,154" stroke="#1c120a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Ambient Golden Sparkle -->
+  <g fill="url(#goldGlint2)" opacity="0.6">
+    <polygon points="400,140 403,147 410,150 403,153 400,160 397,153 390,150 397,147"/>
+    <polygon points="100,120 102,125 107,127 102,129 100,134 98,129 93,127 98,125"/>
+  </g>
+</svg>

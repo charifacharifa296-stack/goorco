@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOORCO Administration | Direction Générale Casablanca & Abidjan</title>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('goorco_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+  <style>
+    /* Admin specific overrides */
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .admin-sidebar {
+      width: 280px;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+    html[dir="rtl"] .admin-sidebar {
+      border-right: none;
+      border-left: 1px solid var(--border-subtle);
+    }
+    .admin-sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .admin-nav {
+      list-style: none;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-decoration: none;
+    }
+    .admin-nav-item:hover,
+    .admin-nav-item.active {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      border: 1px solid var(--border-subtle);
+    }
+    .admin-content {
+      flex-grow: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+      max-width: 1400px;
+    }
+    .admin-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .admin-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .admin-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .admin-stat-card .num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+    .admin-stat-card .lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    /* Tables */
+    .admin-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+    .admin-table-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+    html[dir="rtl"] .data-table {
+      text-align: right;
+    }
+    .data-table th {
+      background: var(--bg-secondary);
+      padding: 14px 20px;
+      font-weight: 700;
+      color: var(--gold-light);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .data-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+    }
+    .data-table tr:hover td {
+      background: rgba(212, 175, 55, 0.04);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-confirmed, .status-delivered, .status-accepted {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .status-pending, .status-new {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .status-completed, .status-processing, .status-reviewed, .status-interview {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    .status-cancelled, .status-rejected {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-action-icon {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-action-icon:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+    .btn-action-delete:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    /* Admin Login Overlay */
+    .admin-login-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg-primary);
+      background-image: var(--body-bg-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .admin-login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--gold-glow);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      backdrop-filter: blur(16px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================== -->
+  <!-- ADMIN LOGIN OVERLAY                            -->
+  <!-- ============================================== -->
+  <div id="adminLoginOverlay" class="admin-login-wrapper" style="display: none;">
+    <div class="admin-login-card">
+      <div style="text-align: center; margin-bottom: 28px;">
+        <div class="logo-symbol" style="width: 60px; height: 60px; font-size: 2rem; margin: 0 auto 16px;">👑</div>
+        <h2 class="serif-title gold-gradient-text" style="font-size: 1.8rem; margin: 0 0 6px 0;">GOORCO</h2>
+        <p style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">
+          Espace Administration Sécurisé
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 6px;">
+          Direction Générale Casablanca & Abidjan
+        </p>
+      </div>
+
+      <div id="adminLoginAlert" style="display: none; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 0.88rem; background: rgba(244, 63, 94, 0.15); border: 1px solid var(--rose); color: var(--rose);"></div>
+
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label for="adminUsername" style="display: block; margin-bottom: 8px; font-size: 0.88rem; font-weight: 600;">
+            Identifiant / Nom d'utilisateur
+          </label>
+          <input type="text" id="adminUsername" class="form-control" required placeholder="Ex: admin" autocomplete="username">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label for="adminPassword" style="display: block; margin-bottom: 8px; font-size: 0.88rem; font-weight: 600;">
+            Mot de passe
+          </label>
+          <div style="position: relative;">
+            <input type="password" id="adminPassword" class="form-control" required placeholder="Entrez votre mot de passe" autocomplete="current-password" style="padding-right: 44px;">
+            <button type="button" onclick="toggleAdminPasswordVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.1rem;" title="Afficher/masquer">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="adminLoginBtn" class="btn-gold" style="width: 100%; justify-content: center; padding: 12px 20px; font-size: 1rem;">
+          🔐 Se connecter à l'Administration
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: center; align-items: center; font-size: 0.85rem;">
+        <a href="/" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px;">
+          ← Retour au site public
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="logo-container">
+          <div class="logo-symbol" style="width: 40px; height: 40px; font-size: 1.2rem;">👑</div>
+          <div class="logo-text-wrap">
+            <h2 class="serif-title gold-gradient-text" style="font-size: 1.2rem;">GOORCO</h2>
+            <p style="font-size: 0.65rem; color: var(--gold-primary);">Administration Centrale</p>
+          </div>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li>
+          <a class="admin-nav-item active" data-tab="tab-dashboard">
+            <span>📊</span> <span data-i18n="admin_nav_dashboard">Tableau de Bord</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-appointments">
+            <span>📅</span> <span data-i18n="admin_nav_appointments">Rendez-vous</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-services">
+            <span>💈</span> <span data-i18n="admin_nav_services">Prestations</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-products">
+            <span>🛍️</span> <span data-i18n="admin_nav_products">E-Commerce & Stocks</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-orders">
+            <span>📦</span> <span data-i18n="admin_nav_orders">Commandes Clients</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-jobs">
+            <span>💼</span> <span data-i18n="admin_nav_jobs">GOORCO Jobs & Offres</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-applications">
+            <span>📝</span> <span data-i18n="admin_nav_applications">Candidatures Reçues</span>
+          </a>
+        </li>
+        <li>
+          <a class="admin-nav-item" data-tab="tab-providers">
+            <span>✂️</span> <span data-i18n="admin_nav_providers">Équipes & Barbiers</span>
+          </a>
+        </li>
+      </ul>
+
+      <div style="padding: 20px; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 12px;">
+        <div style="padding: 12px 14px; background: rgba(212, 175, 55, 0.08); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Connecté :</div>
+          <div id="adminUserDisplayName" style="font-weight: 700; color: var(--gold-light); font-size: 0.88rem; margin-top: 2px;">
+            Directeur Général
+          </div>
+        </div>
+        <a href="/" class="btn-outline-gold" style="width: 100%; justify-content: center; font-size: 0.85rem;">
+          🌐 Voir le Site Public
+        </a>
+        <button onclick="handleAdminLogout()" class="btn-outline-gold" style="width: 100%; justify-content: center; font-size: 0.85rem; color: var(--rose); border-color: rgba(244, 63, 94, 0.4);">
+          🚪 Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-content">
+      <!-- Admin Header Bar with Location Filter & Language Toggle -->
+      <div class="admin-header-bar">
+        <div>
+          <h2 class="serif-title gold-gradient-text" id="adminSectionHeading">Tableau de Bord Global</h2>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Supervision des deux salons : Casablanca (Maroc) & Abidjan (Côte d’Ivoire)</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <!-- Filter by branch -->
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Filtrer :</span>
+            <select id="adminLocationFilter" class="form-control" style="padding: 6px 12px; font-size: 0.85rem;">
+              <option value="all">🌍 Tous les Salons (Casa & Babi)</option>
+              <option value="casablanca">🇲🇦 Casablanca uniquement</option>
+              <option value="cote_divoire">🇨🇮 Abidjan uniquement</option>
+            </select>
+          </div>
+
+          <!-- Theme Switcher -->
+          <div class="theme-switch-wrap">
+            <button class="theme-pill-btn active" data-theme-val="light" onclick="setTheme('light')" title="Lumineux">☀️</button>
+            <button class="theme-pill-btn" data-theme-val="royal" onclick="setTheme('royal')" title="Royal">👑</button>
+            <button class="theme-pill-btn" data-theme-val="dark" onclick="setTheme('dark')" title="Sombre">🌙</button>
+          </div>
+
+          <!-- Multilingual picker -->
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+            <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          </div>
+
+          <!-- Quick Logout Button -->
+          <button onclick="handleAdminLogout()" class="btn-outline-gold" style="font-size: 0.82rem; padding: 6px 12px; color: var(--rose); border-color: rgba(244, 63, 94, 0.4);" title="Déconnexion">
+            🚪 Quitter
+          </button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 1: DASHBOARD OVERVIEW                      -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-dashboard">
+        <div class="admin-stats-row">
+          <div class="admin-stat-card">
+            <div class="lbl">Total Rendez-vous</div>
+            <div class="num" id="statTotalAppts">-</div>
+            <div style="font-size: 0.75rem; color: var(--emerald);">🇲🇦 Casa: <span id="statCasaAppts">-</span> | 🇨🇮 Babi: <span id="statCIAppts">-</span></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="lbl">Chiffre d’Affaires MAD</div>
+            <div class="num" id="statRevenueMAD">- MAD</div>
+            <div style="font-size: 0.75rem; color: var(--gold-light);">Boutique Casablanca</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="lbl">Chiffre d’Affaires FCFA</div>
+            <div class="num" id="statRevenueXOF">- FCFA</div>
+            <div style="font-size: 0.75rem; color: var(--gold-light);">Boutique Abidjan</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="lbl">Commandes E-Commerce</div>
+            <div class="num" id="statTotalOrders">-</div>
+            <div style="font-size: 0.75rem; color: var(--cyan);">Articles expédiés & en attente</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="lbl">Candidatures GOORCO Jobs</div>
+            <div class="num" id="statTotalApplications">-</div>
+            <div style="font-size: 0.75rem; color: var(--emerald);">Profils reçus</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="lbl">Prestations Actives</div>
+            <div class="num" id="statTotalServices">-</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Dans les 2 catalogues</div>
+          </div>
+        </div>
+
+        <!-- Recent Appointments Mini Card -->
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <h3 class="serif-title" style="font-size: 1.15rem; color: var(--gold-light);">📅 Rendez-vous Récents</h3>
+            <button class="btn-outline-gold" style="font-size: 0.8rem; padding: 6px 14px;" onclick="switchAdminTab('tab-appointments')">
+              Voir tous les rendez-vous ➔
+            </button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Salon</th>
+                <th>Client</th>
+                <th>Prestation</th>
+                <th>Date & Heure</th>
+                <th>Rappel</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="dashboardRecentAppointments">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 2: APPOINTMENTS MANAGEMENT                 -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-appointments" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Gestion de Tous les Rendez-vous</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Confirmez, terminez ou envoyez un rappel automatique par WhatsApp/SMS.</p>
+            </div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Salon</th>
+                  <th>Client</th>
+                  <th>Téléphone</th>
+                  <th>Prestation</th>
+                  <th>Barbier / Coiffeur</th>
+                  <th>Date & Heure</th>
+                  <th>Rappel</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminAppointmentsTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 3: SERVICES MANAGEMENT (CRUD)             -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-services" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Prestations & Catalogues des Salons</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Gérez les soins spécifiques à Casablanca et Abidjan.</p>
+            </div>
+            <button class="btn-gold" onclick="openAddServiceModal()">
+              ➕ Ajouter une Prestation
+            </button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Salon</th>
+                  <th>Catégorie</th>
+                  <th>Nom de la Prestation</th>
+                  <th>Prix</th>
+                  <th>Durée</th>
+                  <th>Badge</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminServicesTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 4: PRODUCTS & E-COMMERCE (CRUD)            -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-products" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Catalogue Produits E-Commerce</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Huiles, pommades, matériel et coffrets en vente sur la boutique.</p>
+            </div>
+            <button class="btn-gold" onclick="openAddProductModal()">
+              ➕ Ajouter un Produit
+            </button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Catégorie</th>
+                  <th>Nom du Produit</th>
+                  <th>Prix MAD</th>
+                  <th>Prix FCFA</th>
+                  <th>Stock</th>
+                  <th>Badge</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 5: ORDERS MANAGEMENT                      -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-orders" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Commandes de la Boutique</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Suivi des paiements, livraisons et expéditions.</p>
+            </div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Réf Commande</th>
+                  <th>Date</th>
+                  <th>Client</th>
+                  <th>Téléphone</th>
+                  <th>Adresse & Ville</th>
+                  <th>Mode Paiement</th>
+                  <th>Articles</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 6: GOORCO JOBS OFFERS (CRUD)              -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-jobs" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Offres d’Emploi GOORCO Jobs</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Postes ouverts pour les salons de Casablanca et Abidjan.</p>
+            </div>
+            <button class="btn-gold" onclick="openAddJobModal()">
+              ➕ Publier une Nouvelle Offre
+            </button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Salon</th>
+                  <th>Intitulé du Poste</th>
+                  <th>Contrat</th>
+                  <th>Rémunération</th>
+                  <th>Expérience</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminJobsTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 7: JOB APPLICATIONS RECEIVED              -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-applications" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Candidatures Reçues</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Examinez les CV, portfolios et motivations des candidats.</p>
+            </div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Poste visé</th>
+                  <th>Salon</th>
+                  <th>Candidat</th>
+                  <th>Contact</th>
+                  <th>Expérience</th>
+                  <th>Portfolio</th>
+                  <th>Motivation</th>
+                  <th>Statut</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminApplicationsTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- TAB 8: PROVIDERS & STAFF (ÉQUIPE)              -->
+      <!-- ============================================== -->
+      <div class="admin-tab-pane" id="tab-providers" style="display: none;">
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <div>
+              <h3 class="serif-title" style="font-size: 1.25rem; color: var(--gold-light);">Équipe des Maîtres Barbiers & Coiffeurs</h3>
+              <p style="color: var(--text-muted); font-size: 0.82rem;">Gestion des collaborateurs, coiffeurs et barbiers à Casablanca et Abidjan.</p>
+            </div>
+            <button class="btn-gold" onclick="openAddProviderModal()">
+              ➕ Ajouter un Collaborateur / Barbier
+            </button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Salon</th>
+                  <th>Nom & Titre</th>
+                  <th>Spécialité Clé</th>
+                  <th>Contact Direct</th>
+                  <th>Code PIN</th>
+                  <th>Note</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminProvidersTbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: ADD / EDIT SERVICE                      -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="serif-title" id="serviceModalTitle">Ajouter une Prestation</h3>
+        <button class="cart-close-btn" onclick="closeServiceModal()">&times;</button>
+      </div>
+      <form id="serviceModalForm">
+        <input type="hidden" id="editServiceId" value="">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Salon Destinataire *</label>
+              <select id="serviceLocation" class="form-control" required>
+                <option value="casablanca">🇲🇦 Casablanca Prestige</option>
+                <option value="cote_divoire">🇨🇮 Abidjan Riviera</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Catégorie *</label>
+              <input type="text" id="serviceCategory" class="form-control" required placeholder="Ex: Coupes & Coiffage">
+            </div>
+            <div class="form-group">
+              <label>Nom en Français *</label>
+              <input type="text" id="serviceNameFr" class="form-control" required placeholder="Ex: Coupe Dégradé Américain">
+            </div>
+            <div class="form-group">
+              <label>Nom en Arabe</label>
+              <input type="text" id="serviceNameAr" class="form-control" dir="rtl" placeholder="قصة شعر وتدريج أمريكي">
+            </div>
+            <div class="form-group">
+              <label>Nom en Anglais</label>
+              <input type="text" id="serviceNameEn" class="form-control" placeholder="American Skin Fade Cut">
+            </div>
+            <div class="form-group">
+              <label>Prix (MAD ou FCFA selon salon) *</label>
+              <input type="number" id="servicePrice" class="form-control" required placeholder="Ex: 150 ou 5000">
+            </div>
+            <div class="form-group">
+              <label>Durée (minutes) *</label>
+              <input type="number" id="serviceDuration" class="form-control" required value="45">
+            </div>
+            <div class="form-group">
+              <label>Badge Spécial (optionnel)</label>
+              <input type="text" id="serviceBadge" class="form-control" placeholder="Ex: Populaire, VIP, Tendance">
+            </div>
+            <div class="form-group form-group-full">
+              <label>URL de la Photo</label>
+              <input type="url" id="serviceImageUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Description Détaillée (Français)</label>
+              <textarea id="serviceDescFr" class="form-control" rows="2" placeholder="Description de la prestation..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeServiceModal()">Annuler</button>
+          <button type="submit" class="btn-gold">Enregistrer la Prestation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: ADD / EDIT PRODUCT                      -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="serif-title" id="productModalTitle">Ajouter un Produit</h3>
+        <button class="cart-close-btn" onclick="closeProductModal()">&times;</button>
+      </div>
+      <form id="productModalForm">
+        <input type="hidden" id="editProductId" value="">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Catégorie *</label>
+              <input type="text" id="prodCategory" class="form-control" required placeholder="Ex: Huiles & Sérums">
+            </div>
+            <div class="form-group">
+              <label>Badge</label>
+              <input type="text" id="prodBadge" class="form-control" placeholder="Ex: Best-Seller">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Nom du Produit (Français) *</label>
+              <input type="text" id="prodNameFr" class="form-control" required placeholder="Ex: Huile Barbe Bio">
+            </div>
+            <div class="form-group">
+              <label>Nom en Arabe</label>
+              <input type="text" id="prodNameAr" class="form-control" dir="rtl" placeholder="زيت اللحية الفاخر">
+            </div>
+            <div class="form-group">
+              <label>Nom en Anglais</label>
+              <input type="text" id="prodNameEn" class="form-control" placeholder="Premium Beard Oil">
+            </div>
+            <div class="form-group">
+              <label>Prix Maroc (MAD) *</label>
+              <input type="number" id="prodPriceMAD" class="form-control" required placeholder="180">
+            </div>
+            <div class="form-group">
+              <label>Prix Côte d'Ivoire (FCFA) *</label>
+              <input type="number" id="prodPriceXOF" class="form-control" required placeholder="11000">
+            </div>
+            <div class="form-group">
+              <label>Quantité en Stock *</label>
+              <input type="number" id="prodStock" class="form-control" required value="20">
+            </div>
+            <div class="form-group form-group-full">
+              <label>URL de la Photo</label>
+              <input type="url" id="prodImageUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Description du Produit</label>
+              <textarea id="prodDescFr" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeProductModal()">Annuler</button>
+          <button type="submit" class="btn-gold">Enregistrer le Produit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: ADD / EDIT JOB OFFER & ANNOUNCEMENT      -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="jobModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="serif-title" id="jobModalTitle">Publier une Offre / Annonce d’Emploi</h3>
+        <button class="cart-close-btn" onclick="closeJobModal()">&times;</button>
+      </div>
+      <form id="jobModalForm">
+        <input type="hidden" id="editJobId">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Salon Destinataire *</label>
+              <select id="jobLocation" class="form-control" required>
+                <option value="casablanca">🇲🇦 Casablanca Prestige</option>
+                <option value="cote_divoire">🇨🇮 Abidjan Riviera</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Type de Contrat *</label>
+              <select id="jobContract" class="form-control" required>
+                <option value="CDI">CDI (Contrat Durée Indéterminée)</option>
+                <option value="CDD">CDD</option>
+                <option value="Freelance">Freelance / Pourcentage</option>
+                <option value="Stage">Stage Pré-Embauche</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Intitulé du Poste / Annonce (Français) *</label>
+              <input type="text" id="jobTitleFr" class="form-control" required placeholder="Ex: Master Barbier Dégradé Spécialiste">
+            </div>
+            <div class="form-group">
+              <label>Intitulé en Arabe</label>
+              <input type="text" id="jobTitleAr" class="form-control" dir="rtl" placeholder="حلاق خبير">
+            </div>
+            <div class="form-group">
+              <label>Statut de l'Annonce</label>
+              <select id="jobActive" class="form-control">
+                <option value="1">🟢 Active / Visible aux candidats</option>
+                <option value="0">🔴 Clôturée / Masquée</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fourchette Salariale *</label>
+              <input type="text" id="jobSalary" class="form-control" required placeholder="Ex: 8 000 - 12 000 MAD ou 350 000 FCFA">
+            </div>
+            <div class="form-group">
+              <label>Expérience Requise *</label>
+              <input type="text" id="jobExp" class="form-control" required placeholder="Ex: 2 ans en salon haut de gamme">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Photo / Illustration de l'Offre *</label>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <img id="jobImagePreview" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=80" alt="Aperçu" style="width: 70px; height: 50px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid var(--gold-primary); flex-shrink: 0;">
+                <input type="url" id="jobImageUrl" class="form-control" placeholder="https://images.unsplash.com/..." style="flex: 1;" oninput="updateJobImagePreview(this.value)">
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); align-self: center;">Photos suggérées :</span>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setJobImagePreset('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80')">Barbier Visagiste</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setJobImagePreset('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80')">Coloriste / Soins</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setJobImagePreset('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=600&q=80')">Afro Taper Fade</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setJobImagePreset('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=600&q=80')">Tresses & Locks</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setJobImagePreset('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80')">Manager Salon</button>
+              </div>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Description des Missions *</label>
+              <textarea id="jobDescFr" class="form-control" rows="3" required placeholder="Détaillez les responsabilités..."></textarea>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Profil Recherché & Compétences Clés</label>
+              <textarea id="jobReqFr" class="form-control" rows="2" placeholder="Ex: Maîtrise des ciseaux et dégradés, coloration, ponctualité, sens du service client..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeJobModal()">Annuler</button>
+          <button type="submit" class="btn-gold" id="jobModalSubmitBtn">Publier l’Offre</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: ADD / EDIT PROVIDER & STAFF MEMBER       -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="providerModal">
+    <div class="modal-dialog" style="max-width: 740px;">
+      <div class="modal-header">
+        <h3 class="serif-title" id="providerModalTitle">Ajouter un Membre de l’Équipe</h3>
+        <button class="cart-close-btn" onclick="closeProviderModal()">&times;</button>
+      </div>
+      <form id="providerModalForm">
+        <input type="hidden" id="editProviderId">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Salon Destinataire *</label>
+              <select id="provLocation" class="form-control" required>
+                <option value="casablanca">🇲🇦 Casablanca Prestige (Gauthier)</option>
+                <option value="cote_divoire">🇨🇮 Abidjan Riviera (Bonoumin)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Catégorie d’Activité *</label>
+              <select id="provCategory" class="form-control" required>
+                <option value="coiffure">✂️ Coiffure & Barbiers</option>
+                <option value="esthetique">✨ Esthétique & Soins Visage</option>
+                <option value="bien_etre">🌿 Bien-être & Rituels Détente</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Nom & Prénom *</label>
+              <input type="text" id="provName" class="form-control" required placeholder="Ex: Karim El Fassi">
+            </div>
+            <div class="form-group">
+              <label>Rôle / Titre (Français) *</label>
+              <input type="text" id="provRoleFr" class="form-control" required placeholder="Ex: Master Barbier & Styliste d’Art">
+            </div>
+            <div class="form-group">
+              <label>Rôle en Arabe</label>
+              <input type="text" id="provRoleAr" class="form-control" dir="rtl" placeholder="حلاق خبير">
+            </div>
+            <div class="form-group">
+              <label>Rôle en Anglais</label>
+              <input type="text" id="provRoleEn" class="form-control" placeholder="Master Barber & Hair Stylist">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Spécialités / Savoir-faire Clé *</label>
+              <input type="text" id="provSpecialty" class="form-control" required placeholder="Ex: Dégradé royal au rasoir, coupe signature & taille millimétrée">
+            </div>
+            <div class="form-group">
+              <label>Téléphone Professionnel *</label>
+              <input type="tel" id="provPhone" class="form-control" required placeholder="Ex: +212 6 61 11 22 33">
+            </div>
+            <div class="form-group">
+              <label>Email Professionnel *</label>
+              <input type="email" id="provEmail" class="form-control" required placeholder="Ex: karim@goorco.com">
+            </div>
+            <div class="form-group">
+              <label>Code PIN Espace Employé *</label>
+              <input type="text" id="provPin" class="form-control" required value="1234" placeholder="Code 4 chiffres (défaut: 1234)">
+            </div>
+            <div class="form-group">
+              <label>Années d'Expérience</label>
+              <input type="number" id="provExp" class="form-control" value="8" min="1" max="40">
+            </div>
+            <div class="form-group">
+              <label>Note Initiale (sur 5.0)</label>
+              <input type="number" id="provRating" class="form-control" value="4.9" step="0.1" min="3.0" max="5.0">
+            </div>
+            <div class="form-group">
+              <label>Statut / Disponibilité</label>
+              <select id="provAvailable" class="form-control">
+                <option value="1">🟢 En poste / Prise de RDV ouverte</option>
+                <option value="0">🔴 Indisponible / En congé</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Nom du Salon Affiché sur la Fiche</label>
+              <input type="text" id="provSalonName" class="form-control" placeholder="Ex: GOORCO Casablanca Prestige">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Adresse du Salon Affichée sur la Fiche</label>
+              <input type="text" id="provAddress" class="form-control" placeholder="Ex: 45 Boulevard d’Anfa, Quartier Gauthier, Casablanca">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Photo de Profil (Avatar) *</label>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <img id="provImagePreview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Aperçu" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-primary); flex-shrink: 0;">
+                <input type="url" id="provImageUrl" class="form-control" required placeholder="https://images.unsplash.com/..." style="flex: 1;" oninput="updateProvImagePreview(this.value)">
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); align-self: center;">Exemples rapides :</span>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setProvImagePreset('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80')">Barbier 1</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setProvImagePreset('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80')">Barbier 2 (Afro)</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setProvImagePreset('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')">Coiffeuse 1</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="setProvImagePreset('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&q=80')">Coiffeuse 2 (Locks)</button>
+              </div>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Fiches Techniques & Photos de Prestations (JSON personnalisable)</label>
+              <textarea id="provFichesJson" class="form-control" rows="2" placeholder='Laissez vide pour auto-créer une prestation basée sur la spécialité du coiffeur'></textarea>
+              <small style="color: var(--text-muted); font-size: 0.78rem;">Optionnel : laissez vide pour créer automatiquement une fiche technique standard avec tarif selon le salon.</small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeProviderModal()">Annuler</button>
+          <button type="submit" class="btn-gold" id="providerModalSubmitBtn">Enregistrer le Collaborateur</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/i18n.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 700" width="100%" height="100%">
+  <defs>
+    <!-- Background salon lighting -->
+    <radialGradient id="bgLight" cx="45%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2a221b"/>
+      <stop offset="50%" stop-color="#181310"/>
+      <stop offset="100%" stop-color="#0a0807"/>
+    </radialGradient>
+    <radialGradient id="warmSpot" cx="50%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="#e5b869" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7a4628"/>
+      <stop offset="50%" stop-color="#61351c"/>
+      <stop offset="100%" stop-color="#462412"/>
+    </linearGradient>
+    <linearGradient id="clientSkin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6a3d22"/>
+      <stop offset="100%" stop-color="#3b1d0c"/>
+    </linearGradient>
+    <linearGradient id="hairGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f1814"/>
+      <stop offset="50%" stop-color="#120e0b"/>
+      <stop offset="100%" stop-color="#070504"/>
+    </linearGradient>
+    <linearGradient id="goldGlint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe8a3"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a6a1b"/>
+    </linearGradient>
+    <!-- Vignette filter -->
+    <filter id="blurBehind">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- Deep Salon Background -->
+  <rect width="500" height="700" fill="url(#bgLight)"/>
+  <circle cx="260" cy="220" r="260" fill="url(#warmSpot)"/>
+
+  <!-- Salon Mirror & Station outline in soft blur -->
+  <g opacity="0.25" stroke="#d4af37" stroke-width="1.5" fill="none">
+    <ellipse cx="250" cy="240" rx="220" ry="240"/>
+    <line x1="50" y1="520" x2="450" y2="520"/>
+    <circle cx="120" cy="180" r="15"/>
+    <circle cx="380" cy="180" r="15"/>
+  </g>
+
+  <!-- Foreground: Client seated facing right/away -->
+  <g id="client">
+    <!-- Client Body & Cape -->
+    <path d="M120,530 C120,440 180,410 240,410 C290,410 350,440 370,530 L370,700 L110,700 Z" fill="#14171d"/>
+    <path d="M140,510 C180,470 230,450 280,450 C320,450 350,470 370,510" stroke="url(#goldGlint)" stroke-width="2" fill="none" opacity="0.7"/>
+    <!-- Client Neck & Head -->
+    <ellipse cx="240" cy="400" rx="38" ry="48" fill="url(#clientSkin)"/>
+    <!-- Client Scalp & Cornrow/Braid Sections -->
+    <path d="M205,370 C205,320 270,320 275,370 C275,410 205,410 205,370 Z" fill="#0d0a08"/>
+    <!-- Cornrows pattern -->
+    <g stroke="url(#goldGlint)" stroke-width="1.8" fill="none" opacity="0.85">
+      <path d="M215,350 C230,345 255,345 270,355"/>
+      <path d="M212,365 C230,360 255,360 273,370"/>
+      <path d="M210,380 C230,375 255,375 270,385"/>
+      <path d="M215,395 C230,390 255,390 268,400"/>
+    </g>
+    <!-- Long braids falling down client's back/shoulders -->
+    <g stroke="#1a1410" stroke-width="5" stroke-linecap="round">
+      <path d="M210,380 C180,420 160,490 150,580"/>
+      <path d="M220,390 C190,440 175,510 168,600"/>
+      <path d="M230,400 C210,460 195,530 190,620"/>
+      <path d="M245,405 C240,470 235,540 230,640"/>
+    </g>
+  </g>
+
+  <!-- Stylist Standing Behind & Smiling (African woman with stylish braids) -->
+  <g id="stylist">
+    <!-- Stylist Body / Professional Black Salon Apron -->
+    <path d="M160,340 C170,270 210,240 280,240 C350,240 390,270 410,340 L440,650 L140,650 Z" fill="#0d1117"/>
+    <!-- Apron straps with subtle gold trim -->
+    <path d="M230,250 L210,380 M330,250 L350,380" stroke="url(#goldGlint)" stroke-width="1.5" opacity="0.6"/>
+
+    <!-- Stylist Arms positioned forward working on hair -->
+    <!-- Left Arm -->
+    <path d="M180,290 C150,330 155,390 205,395 C220,395 230,380 235,370" fill="url(#skin)" stroke="#381b0c" stroke-width="1.5"/>
+    <!-- Right Arm & Hands braiding -->
+    <path d="M370,290 C390,340 370,395 300,390 C280,390 265,375 250,370" fill="url(#skin)" stroke="#381b0c" stroke-width="1.5"/>
+
+    <!-- Stylist Hands with delicate gold ring / bracelet -->
+    <circle cx="218" cy="385" r="4" fill="url(#goldGlint)"/>
+    <circle cx="282" cy="382" r="4" fill="url(#goldGlint)"/>
+
+    <!-- Stylist Neck -->
+    <path d="M260,200 L260,250 C260,260 300,260 300,250 L300,200 Z" fill="url(#skin)"/>
+
+    <!-- Stylist Head / Radiant Face -->
+    <ellipse cx="280" cy="180" rx="55" ry="68" fill="url(#skin)"/>
+
+    <!-- Beautiful Smile with white teeth -->
+    <path d="M260,205 Q280,225 305,205 Q280,232 260,205 Z" fill="#ffffff"/>
+    <path d="M258,204 Q280,228 307,204" stroke="#462412" stroke-width="2" fill="none"/>
+
+    <!-- Cheek highlights / Warm glow -->
+    <circle cx="250" cy="190" r="14" fill="#a85834" opacity="0.35"/>
+    <circle cx="310" cy="190" r="14" fill="#a85834" opacity="0.35"/>
+
+    <!-- Eyes (Warm & Smiling) -->
+    <path d="M248,170 Q258,162 268,170" stroke="#1f1008" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M292,170 Q302,162 312,170" stroke="#1f1008" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Eyebrows -->
+    <path d="M244,160 Q258,152 270,161" stroke="#120803" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M290,161 Q302,152 316,160" stroke="#120803" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Stylist Hair - Elegant Box Braids gathered up and cascading -->
+    <path d="M225,180 C215,130 240,95 285,95 C335,95 355,130 345,180 C335,160 330,135 285,135 C245,135 235,160 225,180 Z" fill="#0c0907"/>
+    <!-- Top Bun / Crown of braids -->
+    <ellipse cx="285" cy="90" rx="48" ry="36" fill="#140e0a" stroke="url(#goldGlint)" stroke-width="1.5"/>
+
+    <!-- Individual Braids flowing down shoulders -->
+    <g stroke="#1a120c" stroke-width="4.5" stroke-linecap="round">
+      <path d="M235,150 C210,180 195,240 185,320"/>
+      <path d="M245,165 C225,200 210,270 200,350"/>
+      <path d="M335,150 C360,180 375,240 385,320"/>
+      <path d="M325,165 C345,200 360,270 370,350"/>
+    </g>
+    <!-- Gold hair cuffs / rings on braids -->
+    <rect x="198" y="230" width="8" height="6" rx="2" fill="url(#goldGlint)"/>
+    <rect x="364" y="240" width="8" height="6" rx="2" fill="url(#goldGlint)"/>
+    <rect x="208" y="280" width="8" height="6" rx="2" fill="url(#goldGlint)"/>
+    <rect x="354" y="290" width="8" height="6" rx="2" fill="url(#goldGlint)"/>
+  </g>
+
+  <!-- Ambient Golden Sparkle -->
+  <g fill="url(#goldGlint)" opacity="0.6">
+    <polygon points="120,130 123,137 130,140 123,143 120,150 117,143 110,140 117,137"/>
+    <polygon points="390,110 392,115 397,117 392,119 390,124 388,119 383,117 388,115"/>
+    <polygon points="420,440 422,444 426,446 422,448 420,452 418,448 414,446 418,444"/>
+  </g>
+</svg>

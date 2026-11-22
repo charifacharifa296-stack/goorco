@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOORCO | Salon de Haute Coiffure & Barbiers - Casablanca & Abidjan</title>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('goorco_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
+</head>
+<body>
+
+  <!-- Top Location Bar -->
+  <div class="top-bar">
+    <div class="location-switcher-wrap">
+      <button class="branch-pill-btn active" data-location="casablanca" data-switch-location="casablanca">
+        <span class="loc-pin">📍</span>
+        <strong data-i18n="loc_casablanca">Casablanca (Maroc)</strong>
+      </button>
+      <button class="branch-pill-btn" data-location="cote_divoire" data-switch-location="cote_divoire">
+        <span class="loc-pin">📍</span>
+        <strong data-i18n="loc_cote_divoire">Côte d’Ivoire (Abidjan)</strong>
+      </button>
+    </div>
+
+    <div class="top-bar-right">
+      <!-- Theme Switcher Pills -->
+      <div class="theme-switch-wrap" id="themeSwitchWrap">
+        <button class="theme-pill-btn" data-theme-val="light" onclick="setTheme('light')" title="Lumineux">☀️</button>
+        <button class="theme-pill-btn" data-theme-val="royal" onclick="setTheme('royal')" title="Royal">👑</button>
+        <button class="theme-pill-btn active" data-theme-val="dark" onclick="setTheme('dark')" title="Sombre">🌙</button>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+        <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+      </div>
+
+      <!-- Golden Profile Avatar Icon -->
+      <button class="topbar-avatar-btn" id="topbarAvatarBtn" title="Espace Employé &amp; Profil" onclick="document.getElementById('portalJobsBtn').click();">
+        👤
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="logo-container">
+      <div class="logo-box">G</div>
+      <div class="logo-text-wrap">
+        <h1 class="serif-title gold-gradient-text">GOORCO</h1>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#hero" class="active" data-i18n="nav_home">Accueil</a></li>
+      <li><a href="#servicesSection" data-i18n="nav_services">Guide Prestataires</a></li>
+      <li><a href="#jobsSection" data-i18n="nav_jobs">Recrutement</a></li>
+      <li><a href="#ecommerceSection" data-i18n="nav_shop">Boutique</a></li>
+      <li><a href="#bookingSection" data-i18n="nav_booking">Réservation</a></li>
+    </ul>
+
+    <div class="header-actions">
+      <!-- Espace Client solid gold pill -->
+      <button class="btn-espace-client active" id="portalClientBtn">
+        <span data-i18n="nav_client_portal">Espace Client</span>
+      </button>
+
+      <!-- Espace Pro & Equipe link -->
+      <button class="btn-espace-pro" id="portalJobsBtn">
+        <span data-i18n="nav_job_portal">Espace Pro &amp; Équipe</span>
+      </button>
+
+      <!-- Cart Button with badge -->
+      <button class="cart-icon-btn" id="cartOpenBtn" title="Voir le Panier">
+        🛒
+        <span class="cart-badge" style="display: none;">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section — Exact Style from Reference Photo -->
+  <section class="hero-section" id="hero">
+    <div class="hero-inner">
+      <!-- Left Oval: Hairstylist Braiding -->
+      <div class="hero-oval hero-oval-left">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=700&q=80" 
+             onerror="this.onerror=null; this.src='/images/hero-braids.svg';" 
+             alt="Coiffeuse réalisant des tresses africaines">
+      </div>
+
+      <!-- Center Typography & Call to Actions -->
+      <div class="hero-center">
+        <div class="hero-kicker-title serif-title gold-gradient-text" data-i18n="hero_number_one">
+          NUMÉRO 1
+        </div>
+        <h1 class="hero-offer-text serif-title" data-i18n="hero_offer_subtitle">
+          OFFRE D’EMPLOI COIFFURE &amp; ESTHÉTIQUE, RÉSERVATION EN LIGNE, BOUTIQUE
+        </h1>
+
+        <div class="hero-country-switch">
+          <button class="hero-country-btn" data-location="cote_divoire" data-switch-location="cote_divoire" data-i18n="country_cote_divoire">
+            Côte d’Ivoire
+          </button>
+          <button class="hero-country-btn active" data-location="casablanca" data-switch-location="casablanca" data-i18n="country_morocco">
+            Maroc
+          </button>
+        </div>
+
+        <p class="hero-footer-tagline" data-i18n="hero_footer_tagline">
+          GOORCO connecte tout l’univers de la coiffure et de l’esthétique : recruteurs, talents, salons, clients et marques.
+        </p>
+      </div>
+
+      <!-- Right Oval: Professional with Laptop -->
+      <div class="hero-oval hero-oval-right">
+        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=700&q=80" 
+             onerror="this.onerror=null; this.src='/images/hero-barber.svg';" 
+             alt="Professionnel GOORCO sur ordinateur portable">
+      </div>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="hero-stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">15 000+</div>
+        <div class="stat-label" data-i18n="stats_happy_clients">Clients Satisfaits</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label" data-i18n="stats_master_barbers">Prestations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label" data-i18n="stats_locations">Professionnels</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.95 / 5</div>
+        <div class="stat-label" data-i18n="stats_rating">Note Moyenne</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden elements for complete JS compatibility -->
+  <div id="heroLocationIndicator" style="display:none;"></div>
+  <button id="quickStaffShortcutBtn" style="display:none;"></button>
+  <a id="heroJobsBtn" style="display:none;"></a>
+
+  <!-- ============================================== -->
+  <!-- GOORCO MANIFESTO & OFFICIAL DESCRIPTION CARD  -->
+  <!-- ============================================== -->
+  <section class="content-section" id="manifestoSection" style="margin-top: 10px; margin-bottom: 40px;">
+    <div class="goorco-manifesto-card">
+      <div class="manifesto-header">
+        <span class="badge-tag badge-gold" data-i18n="manifesto_badge">✨ L'Univers GOORCO</span>
+        <h3 class="serif-title gold-gradient-text" style="font-size: 2rem; margin: 14px 0 16px;" data-i18n="manifesto_title">
+          Le Hub de Référence de la Coiffure &amp; de l’Esthétique
+        </h3>
+        <p class="manifesto-lead-text" data-i18n="manifesto_lead">
+          <strong>GOORCO</strong> connecte tout l’univers de la coiffure et de l’esthétique : 
+          <span class="highlight-text">recruteurs et talents</span>, 
+          <span class="highlight-text">salons et professionnels</span>, 
+          <span class="highlight-text">clients et pros</span>, 
+          <span class="highlight-text">vendeurs et acheteurs</span> de produits et matériel.
+        </p>
+      </div>
+
+      <div class="manifesto-pillars-grid">
+        <div class="manifesto-pillar-item">
+          <div class="pillar-icon">⚡</div>
+          <h4 data-i18n="pillar_fast_title">Aller Vite</h4>
+          <p data-i18n="pillar_fast_desc">Réservation immédiate 24/7, recrutement fluide de collaborateurs et livraison rapide de matériel et soins pro.</p>
+        </div>
+        <div class="manifesto-pillar-item">
+          <div class="pillar-icon">✨</div>
+          <h4 data-i18n="pillar_quality_title">Garantir la Qualité</h4>
+          <p data-i18n="pillar_quality_desc">Des prestations exécutées selon les règles de l’art, respect strict de l’hygiène et produits haut de gamme certifiés.</p>
+        </div>
+        <div class="manifesto-pillar-item">
+          <div class="pillar-icon">💎</div>
+          <h4 data-i18n="pillar_price_title">Prix Accessibles</h4>
+          <p data-i18n="pillar_price_desc">Des tarifs clairs, justes et transparents adaptés aux réalités de chaque marché au Maroc et à Abidjan.</p>
+        </div>
+        <div class="manifesto-pillar-item">
+          <div class="pillar-icon">📍</div>
+          <h4 data-i18n="pillar_reliable_title">Adresses Fiables &amp; Pros Qualifiés</h4>
+          <p data-i18n="pillar_reliable_desc">Orientation vers des maîtres barbiers vérifiés, coiffeurs visagistes d’élite et salons d’exception de confiance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- CLIENT PORTAL VIEW: SERVICES & BOOKINGS       -->
+  <!-- ============================================== -->
+  <div class="portal-client-view">
+
+    <!-- 1. GUIDE DES MEILLEURS PRESTATAIRES & TALENTS (GOORCO) -->
+    <section class="content-section" id="servicesSection" style="padding-top: 25px; padding-bottom: 45px;">
+      <div class="section-header" style="text-align: center; margin-bottom: 24px;">
+        <span class="badge-tag badge-gold section-tag" style="margin-bottom: 12px; display: inline-flex;">⭐ Guide d’Élite GOORCO</span>
+        <h2 class="serif-title gold-gradient-text" style="font-size: 2.3rem; margin: 8px 0 12px;" data-i18n="services_section_title">Les Meilleurs Prestataires &amp; Talents d’Élite</h2>
+        <p style="color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: 1.05rem;" data-i18n="services_section_subtitle">Le guide de référence : découvrez les fiches techniques et réservez auprès des maîtres artisans les plus doués.</p>
+      </div>
+
+      <!-- Category Filter Bar: Coiffure, Esthétique, Bien-être -->
+      <div class="services-category-bar" style="margin-bottom: 28px;">
+        <span class="category-label" data-i18n="services_categories_label">Catégories :</span>
+        <button class="service-category-btn active" data-service-cat="all" onclick="filterServicesCategory('all')">
+          <span data-i18n="cat_all">Toutes</span>
+        </button>
+        <button class="service-category-btn" data-service-cat="coiffure" onclick="filterServicesCategory('coiffure')">
+          ✂️ <span data-i18n="cat_coiffure">Coiffure</span>
+        </button>
+        <button class="service-category-btn" data-service-cat="esthetique" onclick="filterServicesCategory('esthetique')">
+          💈 <span data-i18n="cat_esthetique">Esthétique</span>
+        </button>
+        <button class="service-category-btn" data-service-cat="bien_etre" onclick="filterServicesCategory('bien_etre')">
+          🌿 <span data-i18n="cat_bien_etre">Bien-être</span>
+        </button>
+      </div>
+
+      <div id="servicesContainer">
+        <!-- Rendered dynamically by JS: GOORCO Certified Pros & Fiches Techniques -->
+      </div>
+    </section>
+
+    <!-- 2. RENDEZ-VOUS / APPOINTMENT BOOKING SECTION -->
+    <section class="content-section" id="bookingSection">
+      <div class="section-header">
+        <span class="badge-tag badge-emerald section-tag">📅 Réservation en Ligne</span>
+        <h2 class="serif-title gold-gradient-text" data-i18n="booking_section_title">Réservation Immédiate & Rappel Automatique</h2>
+        <p data-i18n="booking_section_subtitle">Choisissez votre prestation, votre coiffeur préféré et activez votre rappel personnalisé.</p>
+      </div>
+
+      <div class="booking-wizard-card">
+        <!-- Steps Breadcrumb -->
+        <div class="wizard-steps-indicator">
+          <div class="step-node active" data-step="1">
+            <div class="step-circle">1</div>
+            <span class="step-label" data-i18n="step_service">1. Prestation</span>
+          </div>
+          <div class="step-node" data-step="2">
+            <div class="step-circle">2</div>
+            <span class="step-label" data-i18n="step_datetime">2. Date & Heure</span>
+          </div>
+          <div class="step-node" data-step="3">
+            <div class="step-circle">3</div>
+            <span class="step-label" data-i18n="step_details">3. Coordonnées</span>
+          </div>
+          <div class="step-node" data-step="4">
+            <div class="step-circle">4</div>
+            <span class="step-label" data-i18n="step_confirmation">4. Confirmation</span>
+          </div>
+        </div>
+
+        <!-- Step 1: Prestation & Coiffeur -->
+        <div class="wizard-step-content active" data-step="1">
+          <h3 class="serif-title" style="margin-bottom: 16px;">1. Votre Prestation</h3>
+          
+          <div id="wizardSelectedPrestationCard" style="background: var(--bg-card); border: 2px solid var(--gold-primary); border-radius: var(--radius-md); padding: 22px; margin-bottom: 24px; box-shadow: 0 0 15px var(--gold-glow);">
+            <!-- Populated dynamically by JS -->
+          </div>
+
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ou sélectionner une autre prestation :</label>
+            <select class="form-control" id="wizardServiceSelect">
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; margin-bottom: 10px; font-weight: 600;">Coiffeur / Praticien :</label>
+            <div class="providers-grid" id="wizardProvidersList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; text-align: right;">
+            <button class="btn-gold" data-wizard-next>Continuer vers la Date & Heure ➔</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Date & Time Picker -->
+        <div class="wizard-step-content" data-step="2">
+          <h3 class="serif-title" style="margin-bottom: 16px;" data-i18n="step_datetime">2. Choisissez la Date & l’Heure</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="bookingDate" data-i18n="label_date">Date souhaitée</label>
+              <input type="date" id="bookingDate" class="form-control">
+            </div>
+            <div class="form-group">
+              <label data-i18n="label_time">Créneau horaire disponible</label>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;" id="timeSlotsContainer">
+                <button type="button" class="branch-pill-btn time-slot-btn active" data-time="10:00">10:00</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="11:30">11:30</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="14:00">14:00</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="15:30">15:30</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="17:00">17:00</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="18:30">18:30</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="19:30">19:30</button>
+                <button type="button" class="branch-pill-btn time-slot-btn" data-time="20:30">20:30</button>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+            <button class="btn-outline-gold" data-wizard-prev>← Étape précédente</button>
+            <button class="btn-gold" data-wizard-next>Vos Coordonnées & Rappel ➔</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Details & Reminder Preference -->
+        <div class="wizard-step-content" data-step="3">
+          <h3 class="serif-title" style="margin-bottom: 16px;" data-i18n="step_details">3. Vos Coordonnées & Rappel Automatique</h3>
+          <div id="bookingSummaryMini"></div>
+
+          <form id="bookingFinalForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="clientName" data-i18n="label_full_name">Nom & Prénom *</label>
+                <input type="text" id="clientName" class="form-control" required placeholder="Ex: Mohamed Kabbaj">
+              </div>
+              <div class="form-group">
+                <label for="clientPhone" data-i18n="label_phone">Numéro WhatsApp *</label>
+                <input type="tel" id="clientPhone" class="form-control" required placeholder="+212 6... ou +225 07...">
+              </div>
+              <div class="form-group">
+                <label for="clientEmail" data-i18n="label_email">Adresse Email</label>
+                <input type="email" id="clientEmail" class="form-control" placeholder="client@exemple.com">
+              </div>
+              <div class="form-group">
+                <label data-i18n="label_reminder">Mode de Rappel Automatique</label>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+                  <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                    <input type="radio" name="reminder" value="whatsapp" checked>
+                    <span>💬 <strong data-i18n="reminder_whatsapp">WhatsApp (Conseillé - 24h & 2h avant)</strong></span>
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                    <input type="radio" name="reminder" value="sms">
+                    <span>📱 <span data-i18n="reminder_sms">SMS Textuel</span></span>
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                    <input type="radio" name="reminder" value="email">
+                    <span>✉️ <span data-i18n="reminder_email">Email</span></span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group form-group-full">
+                <label for="clientNotes" data-i18n="label_notes">Demande particulière ou préférences</label>
+                <textarea id="clientNotes" class="form-control" rows="2" placeholder="Ex: Café offert, cheveux sensibles..."></textarea>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+              <button type="button" class="btn-outline-gold" data-wizard-prev>← Étape précédente</button>
+              <button type="submit" class="btn-gold" data-i18n="btn_confirm_booking">Confirmer le Rendez-vous</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 4: Confirmation View -->
+        <div class="wizard-step-content" data-step="4">
+          <div class="confirmation-box">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+            <h3 class="serif-title" style="color: var(--gold-light);" data-i18n="booking_success_title">Rendez-vous Confirmé avec Succès !</h3>
+            <p style="color: var(--text-secondary);" data-i18n="booking_code_label">Code de Réservation Unique :</p>
+            <div class="confirmation-code-display" id="bookingCodeDisplay">GC-CAS-XXXXX</div>
+            <div id="bookingSuccessDetails" style="text-align: left; max-width: 500px; margin: 20px auto; background: var(--bg-card); padding: 18px; border-radius: var(--radius-md);">
+              <!-- Details rendered by JS -->
+            </div>
+            <p style="font-size: 0.85rem; color: var(--emerald); margin-top: 15px;" data-i18n="booking_reminder_note">
+              ✅ Un rappel automatique a été programmé sur votre téléphone.
+            </p>
+            <div style="margin-top: 24px;">
+              <button class="btn-gold" onclick="goToBookingStep(1)">Faire une autre réservation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. GOORCO E-COMMERCE SECTION -->
+    <section class="content-section" id="ecommerceSection">
+      <div class="section-header">
+        <span class="badge-tag badge-cyan section-tag">🛍️ Boutique Officielle</span>
+        <h2 class="serif-title gold-gradient-text" data-i18n="shop_section_title">GOORCO Boutique : Produits de Soin Pro</h2>
+        <p data-i18n="shop_section_subtitle">Huiles nobles, pommades coiffantes et matériel professionnel livrés directement chez vous.</p>
+      </div>
+
+      <div class="products-grid" id="productsContainer">
+        <!-- Rendered by JS from /api/products -->
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- JOBS & STAFF PORTAL VIEW                       -->
+  <!-- ============================================== -->
+  <div class="portal-jobs-view" style="display: none;">
+    <section class="content-section" id="jobsSection">
+
+      <!-- Sub-Tabs: Recrutement & Offres vs Espace Employés / Fiche RDV -->
+      <div class="sub-nav-tabs">
+        <button class="sub-tab-pill active" id="subTabCareersBtn">
+          <span data-i18n="nav_careers_tab">💼 Recrutement & Offres</span>
+        </button>
+        <button class="sub-tab-pill" id="subTabStaffBtn">
+          <span data-i18n="nav_staff_tab">✂️ Espace Employés & Fiche RDV</span>
+        </button>
+      </div>
+
+      <!-- SUB-VIEW 1: RECRUTEMENT & OFFRES GOORCO -->
+      <div id="subViewCareers">
+        <div class="section-header">
+          <span class="badge-tag badge-gold section-tag">💼 Carrières & Recrutement</span>
+          <h2 class="serif-title gold-gradient-text" data-i18n="jobs_section_title">Recrutement : Offres & Opportunités d’Emploi</h2>
+          <p data-i18n="jobs_section_subtitle">Rejoignez une équipe d’élite. Développez votre talent dans un cadre prestigieux et stimulant.</p>
+        </div>
+
+        <!-- Perks Banner -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px;">
+          <div style="background: var(--bg-card); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">💎</div>
+            <h4 style="color: var(--gold-light); margin-bottom: 4px;">Cadre de Prestige</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Salons haut de gamme à Casablanca & Abidjan avec clientèle VIP.</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">📈</div>
+            <h4 style="color: var(--gold-light); margin-bottom: 4px;">Rémunération Attractive</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Fixe garanti + Commissions généreuses sur prestations et ventes boutique.</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 22px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🎓</div>
+            <h4 style="color: var(--gold-light); margin-bottom: 4px;">Formation Continue</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Masterclasses internationales sur les dernières techniques de coupe et dégradé.</p>
+          </div>
+        </div>
+
+        <!-- City Filter for Job Offers -->
+        <div class="jobs-city-filter-bar" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">Filtrer par salon :</span>
+          <button class="branch-pill-btn active" data-jobs-city="all">🌍 Toutes les Offres</button>
+          <button class="branch-pill-btn" data-jobs-city="casablanca">🇲🇦 Casablanca uniquement</button>
+          <button class="branch-pill-btn" data-jobs-city="cote_divoire">🇨🇮 Abidjan uniquement</button>
+        </div>
+
+        <div class="jobs-list" id="jobsContainer">
+          <!-- Rendered by JS from /api/jobs -->
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 2: ESPACE EMPLOYES / FICHE RENDEZ-VOUS -->
+      <div id="subViewStaff" style="display: none;">
+        <div class="section-header">
+          <span class="badge-tag badge-cyan section-tag">✂️ Espace Collaborateurs</span>
+          <h2 class="serif-title gold-gradient-text" data-i18n="emp_portal_title">Espace Employés & Coiffeurs</h2>
+          <p data-i18n="emp_portal_subtitle">Fiche personnelle de planning : consultez les rendez-vous de vos clients et gérez vos prestations.</p>
+        </div>
+
+        <!-- ═══ PORTAIL COLLABORATEUR : CRÉATION + CONNEXION ═══ -->
+        <div id="empLoginScreen" style="max-width:860px; margin: 0 auto 32px auto;">
+
+          <!-- HEADER PORTAIL -->
+          <div style="text-align:center; margin-bottom:28px;">
+            <div style="font-size:3rem; margin-bottom:10px;">💈</div>
+            <h3 class="serif-title gold-gradient-text" style="font-size:1.8rem; margin-bottom:6px;">Espace Collaborateur GOORCO</h3>
+            <p style="color:var(--text-secondary); font-size:0.92rem;">Créez votre fiche pour apparaître dans le Guide Prestataires, ou connectez-vous pour gérer votre profil.</p>
+          </div>
+
+          <!-- DEUX COLONNES : CRÉER (priorité) + SE CONNECTER -->
+          <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:20px; align-items:start;">
+
+            <!-- ━━━ CARTE 1 : CRÉER MA FICHE (mise en avant) ━━━ -->
+            <div style="background: var(--bg-card); border: 2px solid var(--gold-primary); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 8px 40px rgba(212,175,55,0.2); position:relative; overflow:hidden;">
+              <div style="position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));"></div>
+              <span class="badge-tag badge-gold" style="font-size:0.75rem; margin-bottom:12px; display:inline-block;">✨ Nouveau Collaborateur</span>
+              <h4 class="serif-title" style="color:var(--gold-light); font-size:1.25rem; margin-bottom:6px;">Créer ma Fiche Pro</h4>
+              <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:20px; line-height:1.5;">Remplissez votre fiche pour apparaître dans le <strong style="color:var(--gold-light);">Guide Prestataires</strong> visible par tous les clients.</p>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <!-- Salon -->
+                <div style="grid-column:1/-1;">
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Salon *</label>
+                  <select id="sap_location" style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem;">
+                    <option value="casablanca">🇲🇦 Casablanca Prestige</option>
+                    <option value="abidjan">🇨🇮 Abidjan Riviera</option>
+                  </select>
+                </div>
+                <!-- Nom -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Nom complet *</label>
+                  <input id="sap_name" type="text" placeholder="Karim El Fassi"
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- Spécialité -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Spécialité</label>
+                  <input id="sap_specialty" type="text" placeholder="Master Barbier, Locks..."
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- Rôle -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Rôle / Poste</label>
+                  <input id="sap_role_fr" type="text" placeholder="Barbier Senior..."
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- Catégorie -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Catégorie</label>
+                  <select id="sap_category" style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem;">
+                    <option value="coiffure">✂️ Coiffure</option>
+                    <option value="barber">🪒 Barbier</option>
+                    <option value="esthetique">💅 Esthétique</option>
+                    <option value="bienetre">🌿 Bien-être</option>
+                  </select>
+                </div>
+                <!-- Téléphone -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Téléphone</label>
+                  <input id="sap_phone" type="tel" placeholder="+212 6 00 00 00 00"
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- Email -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Email</label>
+                  <input id="sap_email" type="email" placeholder="mon@email.com"
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- PIN -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Code PIN (défaut : 1234)</label>
+                  <input id="sap_pin" type="text" placeholder="4 chiffres" maxlength="8"
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box; letter-spacing:4px;">
+                </div>
+                <!-- Expérience -->
+                <div>
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">Années d'exp.</label>
+                  <input id="sap_experience" type="number" placeholder="5" min="0" max="50"
+                    style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); padding:10px 12px; font-size:0.88rem; box-sizing:border-box;">
+                </div>
+                <!-- Photo Upload -->
+                <div style="grid-column:1/-1;">
+                  <label style="color:var(--gold-light); font-size:0.8rem; display:block; margin-bottom:5px; font-weight:600;">📸 Photo de profil</label>
+                  <div style="display:flex; gap:12px; align-items:center;">
+                    <!-- Avatar preview -->
+                    <div style="position:relative; flex-shrink:0;">
+                      <img id="sap_photo_preview" src="" alt="Photo"
+                        style="width:72px; height:72px; border-radius:50%; object-fit:cover; border:3px solid var(--gold-primary); display:none; background:var(--bg-secondary);">
+                      <div id="sap_photo_placeholder" style="width:72px; height:72px; border-radius:50%; background:var(--bg-secondary); border:2px dashed var(--gold-primary); display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--text-muted); cursor:pointer;" onclick="document.getElementById('sap_file_input').click()">📷</div>
+                    </div>
+                    <!-- Upload button -->
+                    <div style="flex:1;">
+                      <input id="sap_file_input" type="file" accept="image/*" style="display:none;" onchange="sapHandleFileUpload(this)">
+                      <button type="button" onclick="document.getElementById('sap_file_input').click()"
+                        style="width:100%; padding:11px 14px; background:var(--bg-secondary); border:2px dashed var(--gold-primary); border-radius:10px; color:var(--gold-light); font-size:0.88rem; cursor:pointer; display:flex; align-items:center; gap:10px; transition:all 0.2s;">
+                        <span style="font-size:1.3rem;">🖼️</span>
+                        <div style="text-align:left;">
+                          <div style="font-weight:600;">Choisir depuis la galerie</div>
+                          <div style="font-size:0.75rem; color:var(--text-muted);">JPG, PNG, WEBP — max 5 Mo</div>
+                        </div>
+                      </button>
+                      <div id="sap_upload_status" style="margin-top:6px; font-size:0.8rem; color:var(--text-muted); display:none;"></div>
+                      <input id="sap_image_url" type="hidden" value="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button onclick="saveNewStaffProvider()" class="btn-gold" style="width:100%; margin-top:20px; padding:13px; font-size:0.95rem; font-weight:700; border-radius:10px;">
+                ✅ Créer ma Fiche &amp; Me Connecter
+              </button>
+            </div>
+
+            <!-- ━━━ CARTE 2 : DÉJÀ UN COMPTE ━━━ -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-card);">
+              <span class="badge-tag badge-cyan" style="font-size:0.75rem; margin-bottom:12px; display:inline-block;">🔐 Déjà Collaborateur</span>
+              <h4 class="serif-title" style="color:var(--text-primary); font-size:1.15rem; margin-bottom:6px;">Accéder à ma Fiche</h4>
+              <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:20px; line-height:1.5;">Connectez-vous avec votre nom (ou email / téléphone) et votre code PIN.</p>
+
+              <div style="margin-bottom:14px;">
+                <label style="color:var(--gold-light); font-size:0.82rem; display:block; margin-bottom:5px; font-weight:600;">👤 Nom / Email / Téléphone</label>
+                <input id="empLoginIdentifier" type="text" placeholder="Karim, karim@goorco.ma..."
+                  style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:10px; color:var(--text-primary); padding:11px 14px; font-size:0.9rem; box-sizing:border-box;"
+                  onkeydown="if(event.key==='Enter') empLoginSubmit()">
+              </div>
+              <div style="margin-bottom:20px;">
+                <label style="color:var(--gold-light); font-size:0.82rem; display:block; margin-bottom:5px; font-weight:600;">🔐 Code PIN</label>
+                <input id="empLoginPin" type="password" placeholder="1234" maxlength="8"
+                  style="width:100%; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:10px; color:var(--text-primary); padding:11px 14px; font-size:1.05rem; letter-spacing:6px; box-sizing:border-box;"
+                  onkeydown="if(event.key==='Enter') empLoginSubmit()">
+              </div>
+              <div id="empLoginError" style="display:none; background:rgba(220,53,69,0.15); border:1px solid rgba(220,53,69,0.4); border-radius:8px; padding:10px 14px; color:#ff6b7a; font-size:0.85rem; margin-bottom:14px; text-align:center;">
+                ❌ Identifiant ou PIN incorrect.
+              </div>
+              <button onclick="empLoginSubmit()" class="btn-outline-gold" style="width:100%; padding:12px; font-size:0.92rem; font-weight:700; border-radius:10px;">
+                🔓 Accéder à ma Fiche
+              </button>
+            </div>
+
+          </div><!-- /grid -->
+        </div>
+
+
+        <!-- EMPLOYEE DASHBOARD & FICHE PRO (VISIBLE DIRECTEMENT) -->
+        <div id="employeeDashboardContainer">
+          <!-- Profile Banner -->
+          <div class="employee-profile-banner">
+            <div class="employee-profile-left">
+              <img id="empProfileAvatar" src="" alt="" class="employee-avatar-lg">
+              <div class="employee-profile-info">
+                <h3><span data-i18n="emp_welcome">Bonjour,</span> <strong id="empProfileName" class="gold-gradient-text"></strong></h3>
+                <p id="empProfileRole"></p>
+                <div class="employee-profile-tags">
+                  <span class="badge-tag badge-gold" id="empProfileLocation"></span>
+                  <span class="badge-tag badge-emerald" id="empProfileRating">⭐ 4.95</span>
+                  <span class="badge-tag badge-cyan">Fauteuil Actif</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <button class="btn-outline-gold" onclick="viewMyProfileInGuide()" style="font-size: 0.85rem;">
+                👀 Voir ma fiche sur le Guide ➔
+              </button>
+              <button onclick="empLogout()" style="background:rgba(220,53,69,0.15); border:1px solid rgba(220,53,69,0.5); color:#ff6b7a; border-radius:8px; padding:8px 14px; font-size:0.82rem; cursor:pointer;">
+                🔒 Se déconnecter
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 Staff KPIs -->
+          <div class="hero-stats-grid" style="margin: 0 0 32px 0;">
+            <div class="stat-item">
+              <div class="stat-number" id="empStatToday">0</div>
+              <div class="stat-label" data-i18n="emp_stat_today">Rendez-vous Aujourd’hui</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="empStatActive" style="color: var(--cyan);">0</div>
+              <div class="stat-label" data-i18n="emp_stat_active">En cours / En attente</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="empStatDone" style="color: var(--emerald);">0</div>
+              <div class="stat-label" data-i18n="emp_stat_done">Prestations Terminées</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" id="empStatRevenue">0 MAD</div>
+              <div class="stat-label" data-i18n="emp_stat_revenue">Revenus Générés</div>
+            </div>
+          </div>
+
+          <!-- Employee Navigation Tabs -->
+          <div class="sub-nav-tabs" style="margin-bottom: 24px; justify-content: flex-start; gap: 10px;">
+            <button class="sub-tab-pill active" id="empTabScheduleBtn" onclick="switchEmployeeSubTab('schedule')">
+              <span>📅 Mon Planning & Rendez-vous Clients</span>
+            </button>
+            <button class="sub-tab-pill" id="empTabProfileBtn" onclick="switchEmployeeSubTab('profile')">
+              <span>✂️ Ma Fiche Pro & Ce que je sais faire</span>
+            </button>
+          </div>
+
+          <!-- SUB-TAB 1: SCHEDULE & APPOINTMENTS SHEET -->
+          <div id="empSubViewSchedule">
+            <div class="employee-appointments-sheet">
+              <div class="sheet-header-bar">
+                <div>
+                  <h3 class="serif-title gold-gradient-text" style="font-size: 1.25rem;" data-i18n="emp_sheet_title">Fiche des Rendez-vous Clients</h3>
+                  <p style="color: var(--text-secondary); font-size: 0.82rem;" data-i18n="emp_sheet_subtitle">Tous les rendez-vous assignés à votre fauteuil. Mettez à jour le statut en temps réel.</p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="sheet-filters-group">
+                    <button class="sheet-filter-btn active" data-emp-filter="all">Tous</button>
+                    <button class="sheet-filter-btn" data-emp-filter="today">Aujourd'hui</button>
+                    <button class="sheet-filter-btn" data-emp-filter="active">À servir</button>
+                    <button class="sheet-filter-btn" data-emp-filter="completed">Terminés</button>
+                  </div>
+                  <button class="btn-action-icon" onclick="loadEmployeeAppointments()" title="Rafraîchir" style="padding: 8px 14px;">
+                    🔄 <span data-i18n="emp_btn_refresh">Actualiser</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- List of Client Appointments -->
+              <div id="employeeAppointmentsList">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB 2: EMPLOYEE PROFILE & CE QU'IL SAIT FAIRE (VISIBLE AUX CLIENTS) -->
+          <div id="empSubViewProfile" style="display: none;">
+            <div style="padding: 28px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-card);">
+              
+              <!-- Header Bar with Guide Prestataires link -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle);">
+                <div>
+                  <h3 class="serif-title gold-gradient-text" style="font-size: 1.35rem; margin-bottom: 4px;">✂️ Ma Fiche Professionnelle GOORCO</h3>
+                  <p style="color: var(--text-secondary); font-size: 0.85rem;">Ces coordonnées et vos prestations techniques s'affichent directement aux clients dans le <strong>Guide Prestataires</strong>.</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                  <button type="button" class="btn-outline-gold" onclick="viewMyProfileInGuide()" style="padding: 8px 16px; font-size: 0.85rem;">
+                    👀 Voir ma fiche sur le Guide ➔
+                  </button>
+                </div>
+              </div>
+
+              <!-- Main Profile Edit Form -->
+              <form id="empProfileEditForm" onsubmit="saveEmployeeProfile(event)">
+                
+                <!-- Section 1: Mes Coordonnées Personnelles & Salon -->
+                <div style="margin-bottom: 30px;">
+                  <h4 style="color: var(--gold-light); font-size: 1.05rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <span>📍</span> 1. Mes Coordonnées & Présentation Publique
+                  </h4>
+                  
+                  <div class="form-grid">
+                    <!-- Photo Avatar Upload -->
+                    <div class="form-group form-group-full">
+                      <label>📸 Photo de Profil *</label>
+                      <div style="display:flex; gap:16px; align-items:center;">
+                        <!-- Avatar preview circle -->
+                        <div style="position:relative; flex-shrink:0; cursor:pointer;" onclick="document.getElementById('empFormFileInput').click()">
+                          <img id="empFormAvatarPreview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Avatar"
+                            style="width:80px; height:80px; border-radius:50%; object-fit:cover; border:3px solid var(--gold-primary); display:block;">
+                          <div style="position:absolute; bottom:0; right:0; background:var(--gold-primary); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:0.75rem;">✏️</div>
+                        </div>
+                        <!-- Upload zone -->
+                        <div style="flex:1;">
+                          <input id="empFormFileInput" type="file" accept="image/*" style="display:none;" onchange="empFormHandleFileUpload(this)">
+                          <button type="button" onclick="document.getElementById('empFormFileInput').click()"
+                            style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:2px dashed var(--gold-primary); border-radius:10px; color:var(--gold-light); font-size:0.9rem; cursor:pointer; display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:1.5rem;">🖼️</span>
+                            <div style="text-align:left;">
+                              <div style="font-weight:600;">Choisir depuis la galerie</div>
+                              <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">JPG, PNG, WEBP — max 5 Mo</div>
+                            </div>
+                          </button>
+                          <div id="empFormUploadStatus" style="margin-top:6px; font-size:0.82rem; color:var(--text-muted); display:none;"></div>
+                          <input id="empFormAvatarUrl" type="hidden" value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Nom & Titre -->
+                    <div class="form-group">
+                      <label>Nom & Prénom *</label>
+                      <input type="text" id="empFormName" class="form-control" required placeholder="Ex: Karim El Fassi">
+                    </div>
+                    <div class="form-group">
+                      <label>Rôle / Titre Professionnel *</label>
+                      <input type="text" id="empFormRole" class="form-control" required placeholder="Ex: Master Barbier & Visagiste d’Art">
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="form-group">
+                      <label>Téléphone direct / WhatsApp (affiché aux clients) *</label>
+                      <input type="tel" id="empFormPhone" class="form-control" required placeholder="Ex: +212 6 61 11 22 33">
+                    </div>
+                    <div class="form-group">
+                      <label>Email Professionnel *</label>
+                      <input type="email" id="empFormEmail" class="form-control" required placeholder="Ex: karim@goorco.com">
+                    </div>
+
+                    <!-- Code PIN personnel -->
+                    <div class="form-group">
+                      <label>Mon Code PIN d'accès Collaborateur *</label>
+                      <input type="text" id="empFormPin" class="form-control" required placeholder="Ex: 1234" maxlength="8">
+                    </div>
+
+                    <!-- Salon & Adresse -->
+                    <div class="form-group">
+                      <label>Nom du Salon *</label>
+                      <input type="text" id="empFormSalonName" class="form-control" required placeholder="Ex: GOORCO Casablanca Prestige">
+                    </div>
+                    <div class="form-group form-group-full">
+                      <label>Adresse Complète du Salon *</label>
+                      <input type="text" id="empFormAddress" class="form-control" required placeholder="Ex: 45 Boulevard d’Anfa, Quartier Gauthier, Casablanca">
+                    </div>
+
+                    <!-- Spécialité globale -->
+                    <div class="form-group form-group-full">
+                      <label>Résumé de vos Spécialités (Ce que vous maîtrisez le mieux) *</label>
+                      <input type="text" id="empFormSpecialty" class="form-control" required placeholder="Ex: Dégradé royal au rasoir, taille de barbe millimétrée, lissage kératine">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 2: Ce que je sais faire / Prestations & Fiches Techniques -->
+                <div style="margin-bottom: 30px; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                      <h4 style="color: var(--gold-light); font-size: 1.05rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+                        <span>💈</span> 2. Ce que je sais faire : Mes Prestations & Réalisations
+                      </h4>
+                      <p style="color: var(--text-secondary); font-size: 0.82rem;">Ajoutez les coupes, dégradés et soins que vous proposez avec vos tarifs et photos de réalisations.</p>
+                    </div>
+                    <button type="button" class="btn-gold" onclick="openAddPrestationModal()" style="font-size: 0.85rem; padding: 6px 14px;">
+                      ➕ Ajouter une Prestation
+                    </button>
+                  </div>
+
+                  <!-- Container for the employee's services list -->
+                  <div id="empServicesListContainer" style="display: flex; flex-direction: column; gap: 16px;">
+                    <!-- Dynamically populated via JS -->
+                  </div>
+                </div>
+
+                <!-- Save & Publish Bar -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(212, 175, 55, 0.08); border: 1px solid var(--gold-primary); border-radius: var(--radius-sm); padding: 16px 20px; flex-wrap: wrap; gap: 14px;">
+                  <div style="font-size: 0.88rem; color: var(--gold-light); display: flex; align-items: center; gap: 8px;">
+                    <span>✨</span>
+                    <span>Vos mises à jour s'actualisent en direct pour les clients sur le Guide Prestataires !</span>
+                  </div>
+                  <button type="submit" class="btn-gold" style="padding: 10px 24px; font-weight: 700; font-size: 0.95rem;">
+                    💾 Enregistrer et Publier sur le Guide
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+
+
+  <!-- ============================================== -->
+  <!-- CART SLIDE-OVER DRAWER                         -->
+  <!-- ============================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 class="serif-title" data-i18n="shop_cart_title">Votre Panier</h3>
+      <button class="cart-close-btn" id="cartCloseBtn">&times;</button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal-row">
+        <span data-i18n="shop_cart_total">Total :</span>
+        <span id="cartTotalDisplay" style="color: var(--gold-light);">0 MAD</span>
+      </div>
+      <button class="btn-gold" id="cartCheckoutBtn" style="width: 100%; justify-content: center;" data-i18n="shop_btn_checkout">
+        Valider ma Commande
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- CHECKOUT MODAL                                 -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="serif-title" data-i18n="checkout_title">Finaliser votre Commande</h3>
+        <button class="cart-close-btn" onclick="closeCheckoutModal()">&times;</button>
+      </div>
+      <form id="checkoutForm">
+        <div class="modal-body">
+          <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-sm); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span>Montant Total à payer :</span>
+            <strong id="checkoutTotalAmount" style="font-size: 1.3rem; color: var(--gold-light);">0 MAD</strong>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label data-i18n="label_full_name">Nom & Prénom *</label>
+              <input type="text" id="checkoutName" class="form-control" required placeholder="Ex: Karim Idrissi">
+            </div>
+            <div class="form-group">
+              <label data-i18n="label_phone">Téléphone WhatsApp *</label>
+              <input type="tel" id="checkoutPhone" class="form-control" required placeholder="+212 6... / +225 07...">
+            </div>
+            <div class="form-group form-group-full">
+              <label data-i18n="checkout_shipping_address">Adresse complète de Livraison *</label>
+              <input type="text" id="checkoutAddress" class="form-control" required placeholder="Quartier, Rue, N° d'appartement ou villa">
+            </div>
+            <div class="form-group">
+              <label data-i18n="checkout_city">Ville *</label>
+              <input type="text" id="checkoutCity" class="form-control" required placeholder="Casablanca ou Abidjan">
+            </div>
+            <div class="form-group">
+              <label data-i18n="checkout_payment_method">Mode de Paiement *</label>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                  <input type="radio" name="checkoutPayment" value="Cash" checked>
+                  <span data-i18n="pay_cash">Paiement à la livraison / Au salon (Espèces)</span>
+                </label>
+                <label id="payOptionCMI" style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                  <input type="radio" name="checkoutPayment" value="CMI Carte Bancaire">
+                  <span data-i18n="pay_cmi">Carte Bancaire CMI (Maroc)</span>
+                </label>
+                <label id="payOptionWave" style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                  <input type="radio" name="checkoutPayment" value="Wave / Orange Money">
+                  <span data-i18n="pay_wave_om">Wave / Orange Money / MTN (Côte d’Ivoire)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeCheckoutModal()">Annuler</button>
+          <button type="submit" class="btn-gold" data-i18n="btn_place_order">Confirmer l’Achat</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS MODAL -->
+  <div class="modal-overlay" id="orderSuccessModal">
+    <div class="modal-dialog" style="max-width: 480px; text-align: center;">
+      <div class="modal-body" style="padding: 40px 30px;">
+        <div style="font-size: 3.5rem; margin-bottom: 12px;">📦</div>
+        <h3 class="serif-title" style="color: var(--gold-light); margin-bottom: 10px;" data-i18n="order_success_title">Commande Validée !</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">Votre commande est enregistrée et en cours de préparation par notre équipe.</p>
+        <p data-i18n="order_code_label">Numéro de Commande :</p>
+        <div class="confirmation-code-display" id="orderSuccessCode">ORD-CAS-XXXX</div>
+        <div style="margin-top: 24px;">
+          <button class="btn-gold" onclick="document.getElementById('orderSuccessModal').classList.remove('open')">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB APPLICATION MODAL -->
+  <div class="modal-overlay" id="jobApplicationModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="serif-title"><span data-i18n="jobs_apply_modal_title">Candidature : </span><span id="jobModalJobTitle" style="color: var(--gold-primary);"></span></h3>
+        <button class="cart-close-btn" onclick="closeJobApplicationModal()">&times;</button>
+      </div>
+      <form id="jobApplicationForm">
+        <div class="modal-body">
+          <!-- Job Details Preview Box -->
+          <div id="jobModalDetailsBox" style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 6px;">
+              <span class="badge-tag badge-gold" id="jobModalLocationBadge">🇲🇦 Casablanca</span>
+              <span class="badge-tag badge-emerald" id="jobModalContractBadge">CDI</span>
+            </div>
+            <div style="font-size: 0.88rem; color: var(--gold-light); font-weight: 700;" id="jobModalSalaryDisplay">7 000 - 12 000 MAD</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="jobModalExpDisplay">Expérience : 2 ans minimum</div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="candName" data-i18n="label_candidate_name">Votre Nom Complet *</label>
+              <input type="text" id="candName" class="form-control" required placeholder="Ex: Jean-Luc Koffi">
+            </div>
+            <div class="form-group">
+              <label for="candPhone" data-i18n="label_candidate_phone">Téléphone WhatsApp *</label>
+              <input type="tel" id="candPhone" class="form-control" required placeholder="+212... / +225...">
+            </div>
+            <div class="form-group">
+              <label for="candEmail" data-i18n="label_candidate_email">Adresse Email *</label>
+              <input type="email" id="candEmail" class="form-control" required placeholder="candidat@email.com">
+            </div>
+            <div class="form-group">
+              <label for="candExp" data-i18n="label_candidate_exp">Années d’Expérience</label>
+              <input type="number" id="candExp" class="form-control" min="0" max="40" value="2">
+            </div>
+            <div class="form-group form-group-full">
+              <label for="candSpecialty">Votre Spécialité Principale *</label>
+              <select id="candSpecialty" class="form-control">
+                <option value="Master Barbier & Rasage Traditionnel">Master Barbier & Rasage Traditionnel au coupe-chou</option>
+                <option value="Dégradé Américain & Afro Fade">Dégradé Américain & Afro Skin Fade</option>
+                <option value="Coloriste & Visagiste Expert">Coloriste & Visagiste Expert</option>
+                <option value="Tresses, Nattes Cornrows & Dreadlocks">Tresses, Nattes Cornrows & Dreadlocks</option>
+                <option value="Soins du Cuir Chevelu & Traitements Kératine">Soins du Cuir Chevelu & Traitements Kératine</option>
+                <option value="Responsable Accueil & Management de Salon">Responsable Accueil & Management de Salon</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label for="candPortfolio" data-i18n="label_candidate_portfolio">Lien Portfolio / Instagram Pro</label>
+              <input type="text" id="candPortfolio" class="form-control" placeholder="instagram.com/mon_art_coiffure">
+            </div>
+            <div class="form-group form-group-full">
+              <label for="candCover" data-i18n="label_candidate_cover">Pourquoi souhaitez-vous rejoindre GOORCO ?</label>
+              <textarea id="candCover" class="form-control" rows="3" placeholder="Présentez brièvement vos compétences clés, techniques maîtrisées et motivations..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeJobApplicationModal()">Fermer</button>
+          <button type="submit" class="btn-gold" data-i18n="btn_submit_application">Envoyer ma Candidature</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT EMPLOYEE PRESTATION (FICHE TECHNIQUE) -->
+  <div class="modal-overlay" id="empPrestationModal">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="serif-title" id="empPrestationModalTitle">Ajouter une Prestation / Réalisation</h3>
+        <button class="cart-close-btn" onclick="closeEmpPrestationModal()">&times;</button>
+      </div>
+      <form id="empPrestationModalForm" onsubmit="saveEmpPrestation(event)">
+        <input type="hidden" id="editPrestaIndex" value="-1">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Catégorie *</label>
+              <select id="prestaCategory" class="form-control" required>
+                <option value="coiffure">✂️ Coiffure & Barbiers</option>
+                <option value="esthetique">✨ Esthétique & Soins Visage</option>
+                <option value="bien_etre">🌿 Bien-être & Rituels</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Icône *</label>
+              <select id="prestaIcon" class="form-control">
+                <option value="✂️">✂️ Ciseaux / Coupe</option>
+                <option value="💈">💈 Barbier / Rasage</option>
+                <option value="👑">👑 Prestation Royale</option>
+                <option value="✨">✨ Soins & Éclat</option>
+                <option value="🌿">🌿 Soins Bio & Détente</option>
+                <option value="🎨">🎨 Coloration & Barbe HD</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Nom de la Prestation (Ce que vous réalisez) *</label>
+              <input type="text" id="prestaName" class="form-control" required placeholder="Ex: Taper Fade Signature, Dégradé Royal + Barbe...">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Description du savoir-faire / Technique appliquée *</label>
+              <input type="text" id="prestaSubtitle" class="form-control" required placeholder="Ex: Dégradé américain ultra-net, traçage rasoir & serviette chaude...">
+            </div>
+            <div class="form-group">
+              <label>Tarif en Dirhams (MAD) *</label>
+              <input type="text" id="prestaPriceMad" class="form-control" required placeholder="Ex: 150 - 250 MAD">
+            </div>
+            <div class="form-group">
+              <label>Tarif en Francs CFA (FCFA) *</label>
+              <input type="text" id="prestaPriceFcfa" class="form-control" required placeholder="Ex: 10 000 - 15 000 FCFA">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Photos des réalisations (1 à 4 URLs séparées par virgule) *</label>
+              <textarea id="prestaImages" class="form-control" rows="2" required placeholder="https://images.unsplash.com/... , https://images.unsplash.com/..."></textarea>
+              <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); align-self: center;">Exemples de photos :</span>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="addPrestaPhotoPreset('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=80')">+ Photo Barbier</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="addPrestaPhotoPreset('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80')">+ Photo Taper Fade</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="addPrestaPhotoPreset('https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80')">+ Photo Tresses</button>
+                <button type="button" class="btn-outline-gold" style="padding: 2px 8px; font-size: 0.75rem;" onclick="addPrestaPhotoPreset('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=400&q=80')">+ Photo Soin</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-outline-gold" onclick="closeEmpPrestationModal()">Annuler</button>
+          <button type="submit" class="btn-gold" id="empPrestaSubmitBtn">Enregistrer la Prestation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPLICATION SUCCESS MODAL -->
+  <div class="modal-overlay" id="applicationSuccessModal">
+    <div class="modal-dialog" style="max-width: 520px; text-align: center;">
+      <div class="modal-body" style="padding: 40px 30px;">
+        <div style="font-size: 3.5rem; margin-bottom: 12px;">🎉</div>
+        <h3 class="serif-title" style="color: var(--gold-light); margin-bottom: 10px;">Candidature Transmise !</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;" id="appSuccessMessage">
+          Votre candidature a été transmise avec succès à la direction des salons GOORCO.
+        </p>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Référence de Candidature :</div>
+        <div class="confirmation-code-display" id="appSuccessCode">CAND-GC-0001</div>
+        <div style="background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 12px; margin: 16px 0; font-size: 0.85rem; color: var(--emerald);">
+          ✅ Notre équipe de recrutement examinera votre profil et vous contactera sous 48 heures via WhatsApp.
+        </div>
+        <div style="margin-top: 24px;">
+          <button class="btn-gold" onclick="document.getElementById('applicationSuccessModal').classList.remove('open')">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <div class="logo-container" style="margin-bottom: 16px;">
+          <div class="logo-symbol">✂️</div>
+          <div class="logo-text-wrap">
+            <h2 class="serif-title gold-gradient-text" style="font-size: 1.4rem;">GOORCO</h2>
+            <p style="font-size: 0.65rem; color: var(--gold-primary);">Haute Coiffure & Barbershop</p>
+          </div>
+        </div>
+        <p data-i18n="footer_desc">
+          GOORCO connecte tout l’univers de la coiffure et de l’esthétique : recruteurs et talents, salons et professionnels, clients et pros, vendeurs et acheteurs de produits et matériel. Notre objectif : aller vite, garantir la qualité des prestations, proposer des prix accessibles et vous orienter vers des professionnels qualifiés et des adresses fiables.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="nav_locations">Nos Salons</h4>
+        <ul>
+          <li><a href="javascript:void(0)" data-switch-location="casablanca">🇲🇦 Casablanca (Gauthier)</a></li>
+          <li><a href="javascript:void(0)" data-switch-location="cote_divoire">🇨🇮 Abidjan (Riviera)</a></li>
+        </ul>
+        <div style="margin-top: 20px;">
+          <a href="/admin" class="btn-outline-gold" style="font-size: 0.8rem; padding: 6px 14px;" data-i18n="admin_shortcut">
+            🔐 Accès Administration
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div data-i18n="footer_rights">&copy; 2026 GOORCO Luxury Hair Salon. Tous droits réservés.</div>
+      <div>
+        <span>Casablanca &bull; Abidjan</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
